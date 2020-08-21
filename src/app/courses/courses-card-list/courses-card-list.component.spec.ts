@@ -10,21 +10,32 @@ import {setupCourses} from '../common/setup-test-data';
 
 
 describe('CoursesCardListComponent', () => {
-  beforeEach(() => {
-    TestBed.configureTestingModule({});
-  });
+  let component: CoursesCardListComponent;
+  let fixture: ComponentFixture<CoursesCardListComponent>;
+  let el: DebugElement;
+
+  beforeEach(async(() => {
+    TestBed.configureTestingModule({
+      imports: [CoursesModule]
+    })
+      .compileComponents()
+      .then(() => {
+        fixture = TestBed.createComponent(CoursesCardListComponent);
+        component = fixture.componentInstance;
+        el = fixture.debugElement;
+      });
+  }));
 
   it('should create the component', () => {
-
-    pending();
-
+    expect(component).toBeTruthy();
   });
 
 
   it('should display the course list', () => {
-
-    pending();
-
+    component.courses = setupCourses();
+    const cards = el.queryAll(By.css('.course-card'));
+    expect(cards.length).toBe(12);
+    console.log(cards);
   });
 
 
